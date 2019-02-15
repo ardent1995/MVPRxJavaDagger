@@ -1,6 +1,5 @@
 package se.indpro.mvprxjavadagger.login;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,15 +8,19 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import se.indpro.mvprxjavadagger.root.App;
 import se.indpro.mvprxjavadagger.R;
 
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.View{
 
     @Inject LoginActivityMVP.Presenter presenter;
-    private EditText etFirstName;
-    private EditText etLastName;
-    private Button btnLogin;
+    @BindView(R.id.et_firstname) EditText etFirstName;
+    @BindView(R.id.et_lastname) EditText etLastName;
+    @BindView(R.id.btn_login) Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +29,12 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
 
         ((App)getApplication()).getComponent().inject(this);
 
-        etFirstName = findViewById(R.id.et_firstname);
-        etLastName = findViewById(R.id.et_lastname);
-        btnLogin = findViewById(R.id.btn_login);
+        ButterKnife.bind(this);
+    }
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.loginButtonClicked();
-            }
-        });
+    @OnClick(R.id.btn_login)
+    public void loginButtonClicked(){
+        presenter.loginButtonClicked();
     }
 
     @Override

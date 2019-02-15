@@ -1,6 +1,6 @@
 package se.indpro.mvprxjavadagger.login;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public class LoginActivityPresenter implements LoginActivityMVP.Presenter{
 
